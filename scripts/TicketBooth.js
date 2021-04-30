@@ -2,6 +2,7 @@ import { RideTicketHolder } from "./rides/RideTicketHolder.js"
 import { FoodTicketHolder } from "./food/FoodTicketHolder.js"
 import { GamesTicketHolder } from "./games/GamesTicketHolder.js"
 import { SideshowTicketHolder } from "./sideshows/SideshowTicketHolder.js"
+import { FullPackageTicketHolder} from "./FullPackageTicketHolder.js"
 
 const contentTarget = document.querySelector(".entry")
 const eventHub = document.querySelector("#state-fair")
@@ -34,6 +35,13 @@ eventHub.addEventListener("click", event => {
     } 
 })
 
+eventHub.addEventListener("click", event => {
+    if (event.target.id === "fullPackageTicket") {
+        const fullPackageEvent = new CustomEvent("fullPackageTicketPurchased")
+        eventHub.dispatchEvent(fullPackageEvent)
+    } 
+})
+
 export const TicketBooth = () => {
     contentTarget.innerHTML = `
     <div class="ticketBooth">
@@ -41,6 +49,7 @@ export const TicketBooth = () => {
     <button id="foodTicket">Food Ticket</button>
     <button id="gamesTicket">Games Ticket</button>
     <button id="sideshowTicket">Sideshow Ticket</button>
+    <button id="fullPackageTicket">Full Package Ticket</button>
     </div>
     `
 }
